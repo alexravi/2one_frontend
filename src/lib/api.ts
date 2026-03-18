@@ -2,7 +2,7 @@
 // All backend calls go through this module.
 // JWT token is stored in localStorage + cookie and auto-attached to requests.
 
-const API_BASE = '/api';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || '';
 
 // ── Token helpers ───────────────────────────────────────────
 export function getToken(): string | null {
