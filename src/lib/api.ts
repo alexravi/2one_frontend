@@ -2,16 +2,9 @@
 // All backend calls go through this module.
 // JWT token is stored in localStorage + cookie and auto-attached to requests.
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || '';
 
-if (!API_BASE) {
-  console.error('🚨 NEXT_PUBLIC_API_URL is not set!');
-  if (process.env.NODE_ENV === 'production') {
-    throw new Error('NEXT_PUBLIC_API_URL is missing in production 🚨');
-  }
-}
-
-console.log('✅ API_BASE from env:', API_BASE);
+console.log('✅ API_BASE from env:', API_BASE || '(not set)');
 
 // ── Token helpers ───────────────────────────────────────────
 export function getToken(): string | null {
@@ -35,6 +28,11 @@ async function apiFetch<T>(
   path: string,
   options: RequestInit = {},
 ): Promise<T> {
+  if (!API_BASE) {
+    console.error('🚨 NEXT_PUBLIC_API_URL is not set! API calls will fail.');
+    throw new Error('NEXT_PUBLIC_API_URL is missing — cannot make API calls');
+  }
+
   const token = getToken();
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
