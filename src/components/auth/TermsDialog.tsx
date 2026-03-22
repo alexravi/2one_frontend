@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/Button";
 interface TermsDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  onAccept: () => void;
+  onAccept?: () => void;
+  isInformational?: boolean;
 }
 
-export function TermsDialog({ isOpen, onClose, onAccept }: TermsDialogProps) {
+export function TermsDialog({ isOpen, onClose, onAccept, isInformational }: TermsDialogProps) {
   const [agreed, setAgreed] = useState(false);
 
   if (!isOpen) return null;
@@ -45,32 +46,42 @@ export function TermsDialog({ isOpen, onClose, onAccept }: TermsDialogProps) {
           </ul>
         </div>
 
-        <div className="flex items-start mb-6">
-          <div className="flex items-center h-5">
-            <input
-              id="terms-agree"
-              type="checkbox"
-              checked={agreed}
-              onChange={(e) => setAgreed(e.target.checked)}
-              className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-            />
+        {!isInformational && (
+          <div className="flex items-start mb-6">
+            <div className="flex items-center h-5">
+              <input
+                id="terms-agree"
+                type="checkbox"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+              />
+            </div>
+            <label htmlFor="terms-agree" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
+              By continuing, you confirm that you understand and agree to these terms.
+            </label>
           </div>
-          <label htmlFor="terms-agree" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
-            By continuing, you confirm that you understand and agree to these terms.
-          </label>
-        </div>
+        )}
 
         <div className="flex justify-end gap-3">
-          <Button variant="outline" onClick={onClose} className="w-full sm:w-auto">
-            Cancel
-          </Button>
-          <Button 
-            onClick={() => { if (agreed) onAccept(); }} 
-            disabled={!agreed}
-            className="w-full sm:w-auto"
-          >
-            I Agree & Continue
-          </Button>
+          {isInformational ? (
+            <Button onClick={onClose} className="w-full sm:w-auto">
+              Close
+            </Button>
+          ) : (
+            <>
+              <Button variant="outline" onClick={onClose} className="w-full sm:w-auto">
+                Cancel
+              </Button>
+              <Button 
+                onClick={() => { if (agreed && onAccept) onAccept(); }} 
+                disabled={!agreed}
+                className="w-full sm:w-auto"
+              >
+                I Agree & Continue
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </div>
