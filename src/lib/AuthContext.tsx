@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useCallback } from "react";
 import {
   authLogin,
   authRegister,
+  authGoogleLogin,
   setToken,
   getToken,
   clearToken,
@@ -17,6 +18,7 @@ interface AuthContextValue {
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (data: RegisterData) => Promise<void>;
+  googleLogin: (token: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -54,6 +56,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(res.user);
   }, []);
 
+  const googleLogin = useCallback(async (token: string) => {
+    const res = await authGoogleLogin(token);
+    setToken(res.access_token);
+    setUser(res.user);
+  }, []);
+
   const logout = useCallback(() => {
     clearToken();
     setUser(null);
@@ -71,6 +79,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isLoading,
         login,
         register,
+        googleLogin,
         logout,
       }}
     >

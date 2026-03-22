@@ -9,10 +9,13 @@ import { ApiError } from "@/lib/api";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { GoogleButton } from "@/components/auth/GoogleButton";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { app as firebaseApp } from "@/lib/firebase";
 
 export default function LoginPage() {
   const { t } = useI18n();
-  const { login } = useAuth();
+  const { login, googleLogin } = useAuth();
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -35,6 +38,33 @@ export default function LoginPage() {
         setError("An unexpected error occurred. Please try again.");
       }
     } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      setIsLoading(true);
+      setError("");
+      const auth = getAuth(firebaseApp);
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      if (credential?.idToken) {
+        await googleLogin(credential.idToken);
+        router.push("/");
+      } else {
+        setError("Could not retrieve Google login token.");
+        setIsLoading(false);
+      }
+    } catch (err: unknown) {
+      if (err instanceof ApiError) {
+        setError(err.message);
+      } else if (err instanceof Error) {
+        setError(err.message || "Google sign-in failed. Please try again.");
+      } else {
+        setError("Google sign-in failed. Please try again.");
+      }
       setIsLoading(false);
     }
   };
@@ -99,6 +129,25 @@ export default function LoginPage() {
           {isLoading ? "Signing in…" : t("auth.login")}
         </Button>
       </form>
+
+      <div className="mt-6">
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-300" />
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="px-2 bg-white dark:bg-gray-800 text-gray-500">Or continue with</span>
+          </div>
+        </div>
+
+        <div className="mt-6 flex justify-center">
+          <GoogleButton 
+            onClick={handleGoogleSignIn} 
+            disabled={isLoading} 
+            text="Sign in with Google" 
+          />
+        </div>
+      </div>
 
       <div className="mt-6 text-center">
         <p className="text-sm text-gray-600">

@@ -158,6 +158,13 @@ export function authRegister(data: RegisterData) {
   });
 }
 
+export function authGoogleLogin(token: string) {
+  return apiFetch<AuthResponse>('/auth/google', {
+    method: 'POST',
+    body: JSON.stringify({ token }),
+  });
+}
+
 // ── Upload endpoints ────────────────────────────────────────
 export function getPresignedUrl(filename: string) {
   return apiFetch<PresignedUrlResponse>('/upload/presigned-url', {
