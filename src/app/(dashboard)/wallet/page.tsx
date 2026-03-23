@@ -7,6 +7,7 @@ import {
   getTransactions,
   getPayoutHistory,
   requestPayout,
+  submitBankVerification,
   ApiError,
   type Transaction,
   type PayoutRequest,
@@ -165,8 +166,19 @@ export default function WalletPage() {
     }
   };
 
-  const handleSaveBankDetails = (e: React.FormEvent) => {
+  const handleSaveBankDetails = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Submitting bank details for verification:", editForm);
+    try {
+      await submitBankVerification({
+        accountName: editForm.accountName,
+        accountNumber: editForm.accountNumber,
+        ifscCode: editForm.ifscCode,
+        bankName: editForm.bankName,
+      });
+    } catch (err) {
+      console.error("Failed to submit to backend", err);
+    }
     setBankDetails({ ...editForm, verified: false, verificationStatus: "pending" });
     setIsEditingBank(false);
   };

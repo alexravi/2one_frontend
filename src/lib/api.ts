@@ -204,6 +204,13 @@ export function getRecordingById(id: string) {
 }
 
 // ── Payout / Wallet endpoints ───────────────────────────────
+export function submitBankVerification(data: { accountName: string, accountNumber: string, ifscCode: string, bankName: string }) {
+  return apiFetch<{ success: boolean }>('/payouts/bank-details/verify', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
 export function getBalance() {
   return apiFetch<{ balance: number }>('/payouts/balance');
 }
