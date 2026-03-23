@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useI18n } from "@/lib/i18n/I18nContext";
 import { 
@@ -28,8 +29,8 @@ export function Sidebar() {
     <aside className="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 flex flex-col transition-colors">
       <div className="h-16 flex items-center px-6 border-b border-gray-100 dark:border-gray-700 mb-4">
         <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
-          <UploadCloud className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-          <span>VoiceData</span>
+          <Image src="/logo.png" alt="2une Logo" width={32} height={32} className="w-8 h-8 object-contain" />
+          <span>2une</span>
         </Link>
       </div>
 

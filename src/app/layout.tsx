@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Voice Data Collection Platform",
-  description: "Upload and manage voice recordings seamlessly.",
+  title: "2une",
+  description: "2une - Voice Data Collection Platform",
 };
 
 export default function RootLayout({
