@@ -18,11 +18,7 @@ export function Navbar() {
         
         <div className="h-8 w-[1px] bg-gray-200 dark:bg-gray-700" />
 
-        {user && (
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            {user.name}
-          </span>
-        )}
+
         
         <button
           onClick={logout}

@@ -14,6 +14,7 @@ export default function DashboardLayout({
 }) {
   const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
+  const [isCollapsed, setIsCollapsed] = React.useState(false);
 
   // Show loading spinner while checking auth state
   if (isLoading) {
@@ -38,8 +39,8 @@ export default function DashboardLayout({
 
   return (
     <div className="min-h-screen flex bg-gray-50 dark:bg-[#16213e] transition-colors">
-      <Sidebar />
-      <div className="flex-1 flex flex-col pl-64">
+      <Sidebar isCollapsed={isCollapsed} onToggle={() => setIsCollapsed(!isCollapsed)} />
+      <div className={`flex-1 flex flex-col transition-all duration-300 ${isCollapsed ? "pl-20" : "pl-64"}`}>
         <Navbar />
         <main className="flex-1 p-6 md:p-10">
           <div className="max-w-7xl mx-auto">
