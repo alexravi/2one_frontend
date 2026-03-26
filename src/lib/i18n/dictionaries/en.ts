@@ -11,6 +11,7 @@ export const en = {
   // Navigation
   "nav.dashboard": "Dashboard",
   "nav.recordings": "My Recordings",
+  "nav.palm_collection": "Palm Collection",
   "nav.wallet": "Wallet",
   "nav.payouts": "Payouts",
   "nav.settings": "Settings",
@@ -25,6 +26,16 @@ export const en = {
   "dashboard.select_files": "Select files from computer",
   "dashboard.supported_formats": "Supported formats: WAV, MP3, M4A",
   "dashboard.submit_verification": "Submit for Verification",
+
+  // Palm collection
+  "palm.title": "Palm Collection",
+  "palm.subtitle": "Upload your palms (right + left), front + back cameras, in the required deliverable format.",
+  "palm.instructions_title": "Instructions (read before uploading)",
+  "palm.participant_info": "Participant information",
+  "palm.sample_images_title": "Sample images (placeholders)",
+  "palm.upload_title": "Upload your 12 palm photos",
+  "palm.submit_verification": "Submit for verification",
+  "palm.pending_verification": "Verification pending",
 
   // Metadata Table
   "table.file_name": "File Name",

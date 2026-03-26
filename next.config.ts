@@ -1,4 +1,8 @@
 import type { NextConfig } from "next";
+import path from "path";
+
+/** Pin workspace root so a stray lockfile (e.g. in $HOME) is not chosen. */
+const projectRoot = path.join(__dirname);
 
 const securityHeaders = [
   {
@@ -45,6 +49,10 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    root: projectRoot,
+  },
+  outputFileTracingRoot: projectRoot,
   async headers() {
     return [
       {

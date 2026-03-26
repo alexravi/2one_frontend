@@ -13,6 +13,7 @@ export const fr: Dictionary = {
   // Navigation
   "nav.dashboard": "Tableau de bord",
   "nav.recordings": "Mes enregistrements",
+  "nav.palm_collection": "Collecte de Paumes",
   "nav.wallet": "Portefeuille et paiements",
   "nav.payouts": "Paiements",
   "nav.settings": "Paramètres",
@@ -27,6 +28,16 @@ export const fr: Dictionary = {
   "dashboard.select_files": "Sélectionner des fichiers",
   "dashboard.supported_formats": "Formats pris en charge : WAV, MP3, M4A",
   "dashboard.submit_verification": "Soumettre pour vérification",
+
+  // Palm collection
+  "palm.title": "Collecte de Paumes",
+  "palm.subtitle": "Téléversez vos paumes (droite + gauche), caméras avant + arrière, dans le format de livraison requis.",
+  "palm.instructions_title": "Instructions (à lire avant de téléverser)",
+  "palm.participant_info": "Informations du participant",
+  "palm.sample_images_title": "Images d'exemple (placeholders)",
+  "palm.upload_title": "Téléversez vos 12 photos de paume",
+  "palm.submit_verification": "Soumettre pour vérification",
+  "palm.pending_verification": "Vérification en attente",
 
   // Metadata Table
   "table.file_name": "Nom du fichier",

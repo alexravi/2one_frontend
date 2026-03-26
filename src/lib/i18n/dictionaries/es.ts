@@ -13,6 +13,7 @@ export const es: Dictionary = {
   // Navigation
   "nav.dashboard": "Panel",
   "nav.recordings": "Mis grabaciones",
+  "nav.palm_collection": "Colección de Palmas",
   "nav.wallet": "Billetera y Pagos",
   "nav.payouts": "Pagos",
   "nav.settings": "Configuración",
@@ -27,6 +28,16 @@ export const es: Dictionary = {
   "dashboard.select_files": "Seleccionar archivos del computador",
   "dashboard.supported_formats": "Formatos soportados: WAV, MP3, M4A",
   "dashboard.submit_verification": "Enviar a verificación",
+
+  // Palm collection
+  "palm.title": "Colección de Palmas",
+  "palm.subtitle": "Sube tus palmas (derecha + izquierda), con cámara frontal y trasera, en el formato de entrega requerido.",
+  "palm.instructions_title": "Instrucciones (lee antes de subir)",
+  "palm.participant_info": "Información del participante",
+  "palm.sample_images_title": "Imágenes de ejemplo (placeholders)",
+  "palm.upload_title": "Sube tus 12 fotos de palmas",
+  "palm.submit_verification": "Enviar para verificación",
+  "palm.pending_verification": "Verificación pendiente",
 
   // Metadata Table
   "table.file_name": "Nombre del archivo",

@@ -29,6 +29,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
   const navItems = [
     { href: "/", label: t("nav.dashboard"), icon: LayoutDashboard },
     { href: "/recordings", label: t("nav.recordings"), icon: Mic2 },
+    { href: "/palm-project", label: t("nav.palm_collection"), icon: UploadCloud },
     { href: "/wallet", label: t("nav.wallet"), icon: Wallet },
     { href: "/settings", label: t("nav.settings"), icon: Settings },
   ];

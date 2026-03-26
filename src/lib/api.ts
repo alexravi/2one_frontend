@@ -254,3 +254,66 @@ export function updateProfile(data: Partial<RegisterData & {
   });
 }
 
+// ── Palm Collection endpoints ────────────────────────────
+export interface PresignedImageUrlResponse {
+  upload_url: string;
+  file_id: string;
+}
+
+export interface PalmPhoto {
+  id: string;
+  slot: string;
+  file_name: string;
+  blob_path: string;
+  blob_url: string;
+  size_bytes: number | null;
+  client_meta: Record<string, unknown> | null;
+}
+
+export interface PalmSubmission {
+  id: string;
+  age: number;
+  gender: string;
+  ethnos: string;
+  profession: string;
+  smartphone_model: string;
+  dominant_hand: string;
+  upload_date: string;
+  validation_status: 'pending_review' | 'approved' | 'rejected';
+  payment_status: string;
+  rejection_reason: string | null;
+  photos: PalmPhoto[];
+}
+
+export function getPresignedImageUrl(filename: string) {
+  return apiFetch<PresignedImageUrlResponse>('/upload/presigned-url-image', {
+    method: 'POST',
+    body: JSON.stringify({ filename }),
+  });
+}
+
+export function registerPalmSubmission(data: {
+  age: number;
+  gender: string;
+  ethnos: string;
+  profession: string;
+  smartphone_model: string;
+  dominant_hand: string;
+  photos: Array<{
+    file_id: string;
+    filename: string;
+    size: number;
+    slot: string;
+    client_meta?: Record<string, unknown>;
+  }>;
+}) {
+  return apiFetch<PalmSubmission>('/palm-submissions', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+export function getMyPalmSubmissions() {
+  return apiFetch<PalmSubmission[]>('/palm-submissions/me');
+}
+
